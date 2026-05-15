@@ -1,0 +1,231 @@
+.app-container {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem 1rem;
+}
+
+.minimal-panel {
+  width: 100%;
+  max-width: 800px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.5rem;
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary);
+  letter-spacing: -0.025em;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--text-muted);
+}
+
+.status-indicator.listening .pulse-dot {
+  background-color: var(--accent);
+  animation: pulse 1.5s infinite;
+}
+
+.status-indicator.listening {
+  color: var(--accent);
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+  70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+/* Editor Area */
+.editor-area {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.text-input {
+  width: 100%;
+  min-height: 150px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  font-family: inherit;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: var(--primary);
+  background: var(--bg-main);
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.text-input:focus {
+  border-color: var(--primary-hover);
+}
+
+.interim-text {
+  font-style: italic;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  padding-left: 0.5rem;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  background: var(--bg-panel);
+  color: var(--primary);
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.btn:not(:disabled):hover {
+  background: var(--bg-main);
+  border-color: var(--primary-hover);
+}
+
+.record-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  transition: all 0.2s;
+}
+
+.record-btn:hover {
+  transform: scale(1.05);
+  background: var(--primary-hover);
+}
+
+.record-btn.is-recording {
+  background: var(--accent);
+  animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-4px); }
+}
+
+.error-banner {
+  color: var(--error);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+/* Visual Keyboard */
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  background: var(--bg-main);
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.key {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg-panel);
+  border: 1px solid var(--key-border);
+  border-radius: 6px;
+  color: var(--key-text);
+  font-size: 0.875rem;
+  font-weight: 500;
+  height: 44px;
+  min-width: 44px;
+  padding: 0 0.5rem;
+  box-shadow: 0 2px 0 var(--key-border);
+  transition: transform 0.1s, box-shadow 0.1s, background-color 0.1s;
+  user-select: none;
+}
+
+.key-wide {
+  flex-grow: 1.5;
+}
+
+.key-wider {
+  flex-grow: 2;
+}
+
+.key-widest {
+  flex-grow: 2.5;
+}
+
+.key-space {
+  flex-grow: 10;
+}
+
+/* Active State for Keys */
+.key.active {
+  background: var(--key-active);
+  transform: translateY(2px);
+  box-shadow: 0 0 0 var(--key-border);
+  color: var(--primary);
+}
+
+@media (max-width: 768px) {
+  .key {
+    min-width: 28px;
+    height: 36px;
+    font-size: 0.75rem;
+    padding: 0 0.25rem;
+  }
+  .minimal-panel {
+    padding: 1.5rem;
+  }
+}
