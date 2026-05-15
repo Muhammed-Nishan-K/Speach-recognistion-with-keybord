@@ -53,13 +53,14 @@ export class SpeechRecognitionService {
       this.recognition.onerror = (event: any) => {
         this.zone.run(() => {
           this.isListening = false;
-          let errorMessage = 'Speech recognition error';
+          let errorMessage = 'Speech recognition error: ' + event.error;
           if (event.error === 'not-allowed') {
             errorMessage = 'Microphone permission denied. Please allow access.';
           } else if (event.error === 'no-speech') {
              // Just a timeout on speech
              errorMessage = '';
           }
+          this.updateState();
           this.stateSubject.next({
             isListening: this.isListening,
             text: this.finalTranscript,
